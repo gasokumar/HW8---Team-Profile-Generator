@@ -34,5 +34,10 @@ describe("Intern", () => {
 
       expect(intern.getRole()).toEqual("Intern");
     });
+    it("should get the intern's school from getSchool()", () => {
+      const intern = new Intern("Ami", 313, "gasokumar@gmail.com", "Columbia");
+
+      expect(intern.getSchool()).toEqual("Columbia");
+    });
   });
 });

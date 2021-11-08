@@ -20,7 +20,12 @@ describe("Manager", () => {
   });
   describe("Methods", () => {
     it("should get the manager's name from getName()", () => {
-      const manager = new Manager("Ami", 313, "gasokumar", 1234567890);
+      const manager = new Manager(
+        "Ami",
+        313,
+        "gasokumar@gmail.com",
+        1234567890
+      );
       expect(manager.getName()).toEqual("Ami");
     });
     it("should get the manager's id from getId()", () => {
@@ -28,11 +33,21 @@ describe("Manager", () => {
       expect(manager.getId()).toEqual(313);
     });
     it("should get the manager's email from getEmail()", () => {
-      const manager = new Manager("Ami", 313, "gasokumar", 1234567890);
+      const manager = new Manager(
+        "Ami",
+        313,
+        "gasokumar@gmail.com",
+        1234567890
+      );
       expect(manager.getEmail()).toEqual("gasokumar@gmail.com");
     });
     it("should get the Manager's role from getRole()", () => {
-      const manager = new Manager("Ami", 313, "gasokumar", 1234567890);
+      const manager = new Manager(
+        "Ami",
+        313,
+        "gasokumar@gmail.com",
+        1234567890
+      );
       expect(manager.getRole()).toEqual("Manager");
     });
   });
