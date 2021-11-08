@@ -1,0 +1,1 @@
+// Since this class inherits properties and methods from the employee class, we need to test that it properly inherits properties and methods from the employee class in addition to the new things added to this class.

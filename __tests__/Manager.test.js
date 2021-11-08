@@ -1,7 +1,5 @@
-// Since this class inherits properties and methods from the employee class, we need to test that it properly inherits properties and methods from the employee class, in addition to the new things added to this class.
+// Since this class inherits properties and methods from the employee class, we need to test that it properly inherits properties and methods from the employee class in addition to the new things added to this class.
 
-const { expect } = require("@jest/globals");
-const { extend } = require("expect");
 const Manager = require("../lib/Manager.js");
 
 describe("Manager", () => {
@@ -30,11 +28,11 @@ describe("Manager", () => {
       expect(manager.getId()).toEqual(313);
     });
     it("should get the manager's email from getEmail()", () => {
-      const manager = new Manager("Ami", 313, "gasokumar@gmail.com");
+      const manager = new Manager("Ami", 313, "gasokumar", 1234567890);
       expect(manager.getEmail()).toEqual("gasokumar@gmail.com");
     });
     it("should get the Manager's role from getRole()", () => {
-      const manager = new Manager("Ami", 313, "gasokumar@gmail.com");
+      const manager = new Manager("Ami", 313, "gasokumar", 1234567890);
       expect(manager.getRole()).toEqual("Manager");
     });
   });
