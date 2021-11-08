@@ -4,22 +4,17 @@ class Employee {
     this.id = id;
     this.email = email;
   }
-  getName() {}
-  getId() {}
-  getEmail() {}
-  getRole() {}
-}
-
-class Vehicle {
-  constructor(id, numberOfWheels, sound) {
-    this.id = id;
-    this.numberOfWheels = numberOfWheels;
-    this.sound = sound;
+  getName() {
+    return this.name;
   }
-
-  printInfo() {
-    console.log(`This vehicle has ${this.numberOfWheels} wheels`);
-    console.log(`This vehicle has an id of ${this.id}`);
+  getId() {
+    return this.id;
+  }
+  getEmail() {
+    return this.email;
+  }
+  getRole() {
+    return "Employee";
   }
 }
-module.exports = Vehicle;
+module.exports = Employee;
