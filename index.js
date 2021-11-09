@@ -15,10 +15,10 @@
 //Import fs and inquirer prompts, as well as class/constructor dependencies
 const fs = require("fs");
 const inquirer = require("inquirer");
-const Employee = require("./lib (Classes)/Employee");
-const Manager = require("./lib (Classes)/Manager");
-const Engineer = require("./lib (Classes)/Engineer");
-const Intern = require("./lib (Classes)/Intern");
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const { data } = require("browserslist");
 const { add } = require("lodash");
 
@@ -125,14 +125,14 @@ const addEmployee = () => {
     });
 };
 
-//Creating a constant reference that refers to the file system method for creating a file.
-// const createFile = fs.writeFile("index.html", data, (err) =>
-//   err
-//     ? console.error(err)
-//     : console.log("Your team profile has been generated!")
-// );
+// Creating a constant reference that refers to the file system method for creating a file.
+const createFile = fs.writeFile("./dist/index.html", data, (err) =>
+  err
+    ? console.error(err)
+    : console.log("Your team profile has been generated!")
+);
 
-//Create the manager, then create the employees
-// addManager().then(addEmployee); //returns teamArray
-addEmployee();
-//The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module.
+//Create the manager, then create the employees. After you create the employees, generate an html card for each employee. Afer this, append these cards to the pre-written html skeleton.
+addManager().then(addEmployee).then(generateHTMLCards);
+
+//The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton.
