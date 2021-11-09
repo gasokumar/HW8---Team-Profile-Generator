@@ -12,12 +12,15 @@
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
 //DEPENDENCIES
-//Import fs and inquirer prompts
+//Import fs and inquirer prompts, as well as class/constructor dependencies
 const fs = require("fs");
 const inquirer = require("inquirer");
-const { off } = require("process");
 const Employee = require("./lib (Classes)/Employee");
 const Manager = require("./lib (Classes)/Manager");
+const Engineer = require("./lib (Classes)/Engineer");
+const Intern = require("./lib (Classes)/Intern");
+
+//Store data in an array and use functions that take in that data to create objects whose properties will be inserted into the cards
 
 // Array to put team members in as they are generated
 const teamArray = [];
@@ -54,7 +57,7 @@ const addManager = () => {
       teamArray.push(manager);
     });
 };
-
+//Employee prompts for either an engineer or an intern. If engineer is selected, in addition to the name, id, and email properties, it will apply a github property as well when constructing the engineer. If an intern is selected, it will be created with the name, id, email, and school properties.
 const addEmployee = () => {
   return inquirer
     .prompt([
@@ -84,21 +87,36 @@ const addEmployee = () => {
       {
         type: "input",
         name: "school",
-        message: "What is the intern's school?",
+        message: "Where does or did the intern go to school??",
         when: (response) => response.role == "Intern",
+      },
+      {
+        type: "confirm",
+        name: "confirmNewEmployee",
+        message: "Do you want to add a new employee?",
+        default: false,
       },
     ])
     .then((input) => {
-      console.log(input);
       const { role, name, id, email, github, school } = input;
+      //If the role of the employee is an engineer, run this block of code, which creates a new engineer object and pushes it to the team array.
       if (role == "Engineer") {
-        const engineer = new Engineer();
+        const elonTusk = new Engineer(name, id, email, github);
+        teamArray.push(elonTusk);
+        console.log(teamArray);
+        //If the role of the employee is an intern, run this block of code, which creates a new intern object and pushes it to the team array.
+      } else if (role == "Intern") {
+        const owenWilson = new Intern(name, id, email, school);
+        teamArray.push(owenWilson);
+        console.log(teamArray);
+      } else if (confirm == false) {
+        return teamArray;
+      } else {
+        return addEmployee(teamArray);
       }
     });
 };
 
-addEmployee();
-
-//Store data in an array and use functions that take in that data to create the cards/html.
+addManager().then(addEmployee);
 
 //Will probably need promises for inquire prompts, then use that data to write to the file.
