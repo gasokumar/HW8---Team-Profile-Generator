@@ -19,6 +19,8 @@ const Employee = require("./lib (Classes)/Employee");
 const Manager = require("./lib (Classes)/Manager");
 const Engineer = require("./lib (Classes)/Engineer");
 const Intern = require("./lib (Classes)/Intern");
+const { data } = require("browserslist");
+const { add } = require("lodash");
 
 //Store data in an array and use functions that take in that data to create objects whose properties will be inserted into the cards
 
@@ -28,8 +30,10 @@ const teamArray = [];
 // INQUIRER PROMPTS =============================================================
 //Manager prompts for when app starts up
 //team manager’s name, employee ID, email address, and office number
+
+//addManager creates a manager and pushes it to the team array.
 const addManager = () => {
-  return inquirer
+  inquirer
     .prompt([
       {
         type: "input",
@@ -57,9 +61,9 @@ const addManager = () => {
       teamArray.push(manager);
     });
 };
-//Employee prompts for either an engineer or an intern. If engineer is selected, in addition to the name, id, and email properties, it will apply a github property as well when constructing the engineer. If an intern is selected, it will be created with the name, id, email, and school properties.
+//Employee prompts for either an engineer or an intern. If engineer is selected, in addition to the name, id, and email properties, it will apply a github property as well when constructing the engineer. If an intern is selected, it will be created with the name, id, email, and school properties. Regardless of which type of employee is selected, they will be pushed to the team array once created.
 const addEmployee = () => {
-  return inquirer
+  inquirer
     .prompt([
       {
         type: "list",
@@ -70,7 +74,7 @@ const addEmployee = () => {
       {
         type: "input",
         name: "name",
-        message: "What is the name of this employee?",
+        message: "What is the name of this next employee?",
       },
       { type: "number", name: "id", message: "What is the employee's id?" },
       {
@@ -98,7 +102,8 @@ const addEmployee = () => {
       },
     ])
     .then((input) => {
-      const { role, name, id, email, github, school } = input;
+      const { role, name, id, email, github, school, confirmNewEmployee } =
+        input;
       //If the role of the employee is an engineer, run this block of code, which creates a new engineer object and pushes it to the team array.
       if (role == "Engineer") {
         const elonTusk = new Engineer(name, id, email, github);
@@ -109,14 +114,25 @@ const addEmployee = () => {
         const owenWilson = new Intern(name, id, email, school);
         teamArray.push(owenWilson);
         console.log(teamArray);
-      } else if (confirm == false) {
+      }
+      if (confirmNewEmployee == false) {
+        //If the user answers no to whether they want to add a team member, return the array of team members
         return teamArray;
       } else {
-        return addEmployee(teamArray);
+        //If the user answers that they do want to add a team member, bring the user back to the beginning
+        addEmployee();
       }
     });
 };
 
-addManager().then(addEmployee);
+//Creating a constant reference that refers to the file system method for creating a file.
+// const createFile = fs.writeFile("index.html", data, (err) =>
+//   err
+//     ? console.error(err)
+//     : console.log("Your team profile has been generated!")
+// );
 
-//Will probably need promises for inquire prompts, then use that data to write to the file.
+//Create the manager, then create the employees
+// addManager().then(addEmployee); //returns teamArray
+addEmployee();
+//The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module.
