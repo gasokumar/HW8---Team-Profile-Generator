@@ -11,49 +11,93 @@
 
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
-
+//DEPENDENCIES
 //Import fs and inquirer prompts
 const fs = require("fs");
 const inquirer = require("inquirer");
 const { off } = require("process");
+const Employee = require("./lib (Classes)/Employee");
 const Manager = require("./lib (Classes)/Manager");
 
 // Array to put team members in as they are generated
-teamArray = [];
-//Write inquirer prompts
+const teamArray = [];
+
+// INQUIRER PROMPTS =============================================================
 //Manager prompts for when app starts up
 //team manager’s name, employee ID, email address, and office number
-// const addManager = () => {
-//   return
-inquirer
-  .prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "What the manager's name?",
-    },
-    { type: "number", name: "id", message: "What is the manager's id?" },
-    {
-      type: "input",
-      name: "email",
-      message: "what is the manager's email address?",
-    },
-    {
-      type: "number",
-      name: "officeNumber",
-      message: "What is the manager's office number?",
-    },
-  ])
-  .then((input) => {
-    const { name, id, email, officeNumber } = input;
-    //Object destructuring: {property, property, property, property} = object
-    const manager = new Manager(name, id, email, officeNumber);
-    console.log(manager);
-    teamArray.push(manager);
+const addManager = () => {
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What the manager's name?",
+      },
+      { type: "number", name: "id", message: "What is the manager's id?" },
+      {
+        type: "input",
+        name: "email",
+        message: "what is the manager's email address?",
+      },
+      {
+        type: "number",
+        name: "officeNumber",
+        message: "What is the manager's office number?",
+      },
+    ])
+    .then((input) => {
+      //The properties are the keys from the above questions that are mapped to the answers the user gives
+      const { name, id, email, officeNumber } = input;
+      //Object destructuring: {property, property, property, property} = object
+      const manager = new Manager(name, id, email, officeNumber);
+      //   console.log(manager);
+      teamArray.push(manager);
+    });
+};
 
-    // const manager = new Manager();
-  });
-// };
+const addEmployee = () => {
+  return inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "role",
+        message: "What is the role of this employee?",
+        choices: ["Engineer", "Intern"],
+      },
+      {
+        type: "input",
+        name: "name",
+        message: "What is the name of this employee?",
+      },
+      { type: "number", name: "id", message: "What is the employee's id?" },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the employee's email?",
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What is this engineer's github username?",
+        when: (response) => response.role == "Engineer",
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "What is the intern's school?",
+        when: (response) => response.role == "Intern",
+      },
+    ])
+    .then((input) => {
+      console.log(input);
+      const { role, name, id, email, github, school } = input;
+      if (role == "Engineer") {
+        const engineer = new Engineer();
+      }
+    });
+};
+
+addEmployee();
 
 //Store data in an array and use functions that take in that data to create the cards/html.
 
