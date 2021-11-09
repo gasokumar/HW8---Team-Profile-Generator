@@ -5,6 +5,6 @@
 
 //Create a function that makes an array that will store the html templates once they've been created
 
-//Join the array into a string and push it to the html page.
+//Join the array into a string and insert it into the html doc.
 
 //Export to index
