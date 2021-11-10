@@ -36,7 +36,7 @@ function managerCard(manager) {
 //Intern
 //Will intake intern properties and input them into an html template
 
-//Create a function that makes an array that will actually use the above functions. This function will be responsible for creating the actual cards and joining the HTML pieces into a string.
+//Create a function that makes an array that will actually use the above functions. This function will be responsible for creating the actual cards and joining the HTML pieces into a string. Ad
 function createHTMLCards(employees) {
   arrayCards = [];
   // For loop that iterates through the employees inputted, gets their role, and generates their card accordingly.
@@ -60,8 +60,7 @@ function createHTMLCards(employees) {
   //Join the array into a string and insert it into the html doc.
 
   //Joining the array of card templates into a string
-  cardsHTML = arrayCards.join("");
-  //Asking the function to output cardsHTML, the string of employee HTML cards
+  const cardsHTML = arrayCards.join("");
   return cardsHTML;
 }
 
@@ -91,5 +90,19 @@ function createPageHTML(cardsHTML) {
 `;
 }
 
+//Stitching the string of card templates into the HTML skeleton and finally creating the entire HTML page.
+function entirePage() {
+  const entirePage = createPageHTML(cardsHTML);
+  return entirePage;
+}
+
 //Export to index
-module.exports = templateHTML;
+module.exports = {
+  managerCard,
+  engineerCard,
+  internCard,
+  createHTMLCards,
+  createPageHTML,
+  //Do i just need entirePage?
+  entirePage,
+};

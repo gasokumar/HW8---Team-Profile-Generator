@@ -1,16 +1,8 @@
 //This file actually runs the application. Has inquirer prompts, stores data, then calls the template helper code functions to create html. Then writes to the index file. This file does the heavy lifting/uses all the stuff we've created. If all the files/functions we created were the infinity stones, then this file is Thanos with the gauntlet.
 
-// WHEN I enter the team manager’s name, employee ID, email address, and office number
-// THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-
-// WHEN I select the engineer option
-// THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-
-// WHEN I select the intern option
-// THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
+
 //DEPENDENCIES
 //Import fs and inquirer prompts, as well as class/constructor dependencies
 const fs = require("fs");
@@ -19,9 +11,6 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const { data } = require("browserslist");
-const { add } = require("lodash");
-const HTMLtemplates = require("./src (Template helper code)");
 
 //Store data in an array and use functions that take in that data to create objects whose properties will be inserted into the cards
 
@@ -34,12 +23,12 @@ const teamArray = [];
 
 //addManager creates a manager and pushes it to the team array.
 const addManager = () => {
-  inquirer
+  return inquirer
     .prompt([
       {
         type: "input",
         name: "name",
-        message: "What the manager's name?",
+        message: "What is the manager's name?",
       },
       { type: "number", name: "id", message: "What is the manager's id?" },
       {
@@ -60,11 +49,12 @@ const addManager = () => {
       const manager = new Manager(name, id, email, officeNumber);
       //   console.log(manager);
       teamArray.push(manager);
+      console.log(teamArray);
     });
 };
 //Employee prompts for either an engineer or an intern. If engineer is selected, in addition to the name, id, and email properties, it will apply a github property as well when constructing the engineer. If an intern is selected, it will be created with the name, id, email, and school properties. Regardless of which type of employee is selected, they will be pushed to the team array once created.
 const addEmployee = () => {
-  inquirer
+  return inquirer
     .prompt([
       {
         type: "list",
@@ -127,13 +117,12 @@ const addEmployee = () => {
 };
 
 // Creating a constant reference that refers to the file system method for creating a file.
-const createFile = fs.writeFile("./dist/index.html", data, (err) =>
-  err
-    ? console.error(err)
-    : console.log("Your team profile has been generated!")
-);
+// const createFile = fs.writeFile("./dist/index.html", data, (err) =>
+//   err
+//     ? console.error(err)
+//     : console.log("Your team profile has been generated!")
+// );
 
 //Create the manager, then create the employees. After you create the employees, generate an html card for each employee. Afer this, append these cards to the pre-written html skeleton.
-addManager().then(addEmployee).then(HTMLtemplates);
-
+addManager().then(addEmployee);
 //The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton.
