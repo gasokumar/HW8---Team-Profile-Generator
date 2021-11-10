@@ -115,8 +115,7 @@ const addEmployee = () => {
         //If the user answers that they do want to add a team member, bring the user back to the beginning
         addEmployee();
       } else {
-        //If the user answers no to whether they want to add a team member, return the array of team members
-        console.log("This is where the return teamArray is");
+        //If the user answers no to whether they want to add a team member, use the array created to generate the cards, then stitch the cards into the HTML skeleton to create the entire HTML content. After the content's been created, create and write it to an index.html file.
         const cardsHTML = createHTMLCards(teamArray);
         const entirePage = createPageHTML(cardsHTML);
         createFile(entirePage);
@@ -124,18 +123,7 @@ const addEmployee = () => {
     });
 };
 
-// function stringify(data) {
-//   string = "";
-//   for (object of data) {
-//     let stringedObject = JSON.stringify(object);
-//     string += stringedObject;
-//   }
-//   return string;
-// }
-// Creating a constant reference that refers to the file system method for creating a file.
-const apple = "apple";
-
-//This function only takes in HTML.
+//This function only takes in a string.
 function createFile(data) {
   fs.writeFile("./dist/index.html", data, (err) =>
     err
@@ -148,34 +136,9 @@ function createFile(data) {
 
 addManager()
   // Returns the inquirer answers for manager
-  .then(addEmployee);
+  .then(addEmployee)
+  .catch((err) => {
+    console.error(err);
+  });
 
-//Returns teamArray, the array of employee objects that store the employee data.
-// .then((teamArray) => {
-
-//   console.log(
-//     "this is immediately after the first addEmployee call" + teamArray
-//   );
-// });
-// .then((pageHTML) => {
-//   return createFile(pageHTML);
-// });
-// .then(entirePage)
-// .then((pageHTML) => {
-//   createFile(pageHTML);
-// })
-// .catch((err) => {
-//   console.error(err);
-// });
-//The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton.
-
-// .then((teamArray) => {
-//   console.log("This is the result of teamArrayteamArray", teamArray);
-//   return createHTMLCards(teamArray);
-//   // returns a string of HTML card templates created from the array of employees
-// })
-// .then((cardsHTML) => {
-//   console.log(typeof createPageHTML(cardsHTML));
-//   return createPageHTML(cardsHTML);
-//   // returns a string of the full html page
-// })
+//The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton. Once this is done, the index.html file is created and written to.
