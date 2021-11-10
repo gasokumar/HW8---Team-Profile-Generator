@@ -60,7 +60,7 @@ function internCard(intern) {
   <div class="card">
     <div class="box">
       <div class="content">
-        <h2>E</h2>
+        <h2>I</h2>
         <h3>${intern.name}</h3>
         <p>Role: Engineer</p>
         <p>ID: ${intern.id}</p>
@@ -84,17 +84,17 @@ function createHTMLCards(employees) {
   // For loop that iterates through the employees inputted, gets their role, and generates their card accordingly.
   for (const employee of employees) {
     const role = employee.getRole();
-    if (role == "Manager") {
+    if (role === "Manager") {
       const card = managerCard(employee);
       arrayCards.push(card);
     }
 
-    if (role == "Engineer") {
+    if (role === "Engineer") {
       const card = engineerCard(employee);
       arrayCards.push(card);
     }
 
-    if (role == "Intern") {
+    if (role === "Intern") {
       const card = internCard(employee);
       arrayCards.push(card);
     }
@@ -135,12 +135,12 @@ function createPageHTML(cardsHTML) {
 // Stitching the string of card templates into the HTML skeleton and finally creating the entire HTML page.
 
 //This function takes in an array (of employee data), makes cards for them, and then stitches the cards into the HTML skeleton to create the index.html contents.
-function entirePage(array) {
-  console.log("This is what I'm putting into entirePage" + array);
-  const cardsHTML = createHTMLCards(array);
-  const entirePage = createPageHTML(cardsHTML);
-  return entirePage;
-}
+// function entirePage(array) {
+//   console.log("This is what I'm putting into entirePage" + array);
+//   const cardsHTML = createHTMLCards(array);
+//   const entirePage = createPageHTML(cardsHTML);
+//   return entirePage;
+// }
 
 //Export to index
 module.exports = {

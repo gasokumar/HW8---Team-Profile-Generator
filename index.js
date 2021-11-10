@@ -117,7 +117,9 @@ const addEmployee = () => {
       } else {
         //If the user answers no to whether they want to add a team member, return the array of team members
         console.log("This is where the return teamArray is");
-        return teamArray;
+        const cardsHTML = createHTMLCards(teamArray);
+        const entirePage = createPageHTML(cardsHTML);
+        createFile(entirePage);
       }
     });
 };
@@ -144,13 +146,17 @@ function createFile(data) {
 
 //Create the manager, then create the employees. After you create the employees, generate an html card for each employee. Afer this, append these cards to the pre-written html skeleton.
 
-addManager() // Returns the inquirer answers for manager
-  .then(addEmployee) //Returns teamArray, the array of employee objects that store the employee data.
-  .then((teamArray) => {
-    console.log(
-      "this is immediately after the first addEmployee call" + teamArray
-    );
-  });
+addManager()
+  // Returns the inquirer answers for manager
+  .then(addEmployee);
+
+//Returns teamArray, the array of employee objects that store the employee data.
+// .then((teamArray) => {
+
+//   console.log(
+//     "this is immediately after the first addEmployee call" + teamArray
+//   );
+// });
 // .then((pageHTML) => {
 //   return createFile(pageHTML);
 // });
