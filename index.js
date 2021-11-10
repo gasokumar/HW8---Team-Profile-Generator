@@ -116,13 +116,25 @@ const addEmployee = () => {
     });
 };
 
+// function stringify(data) {
+//   string = "";
+//   for (object of data) {
+//     let stringedObject = JSON.stringify(object);
+//     string += stringedObject;
+//   }
+//   return string;
+// }
 // Creating a constant reference that refers to the file system method for creating a file.
-const createFile = fs.writeFile("./dist/index.html", data, (err) =>
-  err
-    ? console.error(err)
-    : console.log("Your team profile has been generated!")
-);
+const data = "test string";
+function createFile(data) {
+  fs.writeFile("./dist/index.html", data, (err) =>
+    err
+      ? console.error(err)
+      : console.log("Your team profile has been generated!")
+  );
+}
 
 //Create the manager, then create the employees. After you create the employees, generate an html card for each employee. Afer this, append these cards to the pre-written html skeleton.
-addManager().then(addEmployee).then(createFile);
+createFile(data);
+// addManager().then(addEmployee).then(stringify);
 //The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton.
