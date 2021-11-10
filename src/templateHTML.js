@@ -45,7 +45,7 @@ function engineerCard(engineer) {
           Email:
           <a href="mailto:${engineer.email}">${engineer.email}</a>
         </p>
-        <p>Github: <a href="github.com/${engineer.github}">${engineer.github}</a>
+        <p>Github: <a href="github.com/${engineer.github}">github.com/${engineer.github}</a>
         </p>
       </div>
     </div>
@@ -79,7 +79,6 @@ function internCard(intern) {
 
 //Returns an HTML string of card templates
 function createHTMLCards(employees) {
-  console.log("This is the console log for employees" + employees);
   arrayCards = [];
   // For loop that iterates through the employees inputted, gets their role, and generates their card accordingly.
   for (const employee of employees) {
@@ -149,6 +148,4 @@ module.exports = {
   internCard,
   createHTMLCards,
   createPageHTML,
-  //Do i just need entirePage?
-  entirePage,
 };

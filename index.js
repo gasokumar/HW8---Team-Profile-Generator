@@ -87,7 +87,7 @@ const addEmployee = () => {
       {
         type: "input",
         name: "school",
-        message: "Where does or did the intern go to school??",
+        message: "Where does or did the intern go to school?",
         when: (response) => response.role == "Intern",
       },
       {
