@@ -11,6 +11,7 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const { createHTMLCards, createPageHTML } = require("./src/templateHTML");
 
 //Store data in an array and use functions that take in that data to create objects whose properties will be inserted into the cards
 
@@ -125,7 +126,9 @@ const addEmployee = () => {
 //   return string;
 // }
 // Creating a constant reference that refers to the file system method for creating a file.
-const data = "test string";
+const apple = "apple";
+
+//This function only takes in HTML.
 function createFile(data) {
   fs.writeFile("./dist/index.html", data, (err) =>
     err
@@ -135,6 +138,22 @@ function createFile(data) {
 }
 
 //Create the manager, then create the employees. After you create the employees, generate an html card for each employee. Afer this, append these cards to the pre-written html skeleton.
-createFile(data);
-// addManager().then(addEmployee).then(stringify);
+
+addManager() // Returns the inquirer answers for manager
+  .then(addEmployee) //Returns teamArray, the array of objects that store the employee data.
+  .then((teamArray) => {
+    return createHTMLCards(teamArray);
+    // returns a string of HTML card templates created from the array of employees
+  })
+  .then((cardsHTML) => {
+    console.log(typeof createPageHTML(cardsHTML));
+    return createPageHTML(cardsHTML);
+    // returns a string of the full html page
+  })
+  .then((pageHTML) => {
+    createFile(pageHTML);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 //The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton.

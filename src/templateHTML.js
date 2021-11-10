@@ -21,7 +21,7 @@ function managerCard(manager) {
         <p>ID: ${manager.id}</p>
         <p>
           Email:
-          <a href="mailto:${manager.email}">Insert manager email here</a>
+          <a href="mailto:${manager.email}">${manager.email}</a>
         </p>
         <p>Office Number: ${manager.officeNumber}</p>
       </div>
@@ -36,24 +36,28 @@ function managerCard(manager) {
 //Intern
 //Will intake intern properties and input them into an html template
 
-//Create a function that makes an array that will actually use the above functions. This function will be responsible for creating the actual cards and joining the HTML pieces into a string. Ad
+//Create a function that makes an array that will actually use the above functions. This function will be responsible for creating the actual cards and joining the HTML pieces into a string.
+
+//Returns an HTML string of card templates
 function createHTMLCards(employees) {
   arrayCards = [];
   // For loop that iterates through the employees inputted, gets their role, and generates their card accordingly.
   for (employee of employees) {
     const role = employee.getRole();
     if (role == "Manager") {
-      const card = ManagerCard(employee);
+      const card = managerCard(employee);
       arrayCards.push(card);
     }
 
     if (role == "Engineer") {
-      const card = EngineerCard(employee);
+      break;
+      const card = engineerCard(employee);
       arrayCards.push(card);
     }
 
     if (role == "Intern") {
-      const card = InternCard(employee);
+      break;
+      const card = internCard(employee);
       arrayCards.push(card);
     }
   }
@@ -91,18 +95,18 @@ function createPageHTML(cardsHTML) {
 }
 
 //Stitching the string of card templates into the HTML skeleton and finally creating the entire HTML page.
-function entirePage() {
-  const entirePage = createPageHTML(cardsHTML);
-  return entirePage;
-}
+// function entirePage() {
+//   const entirePage = createPageHTML(cardsHTML);
+//   return entirePage;
+// }
 
 //Export to index
 module.exports = {
   managerCard,
-  engineerCard,
-  internCard,
+  // engineerCard,
+  // internCard,
   createHTMLCards,
   createPageHTML,
   //Do i just need entirePage?
-  entirePage,
+  // entirePage,
 };
