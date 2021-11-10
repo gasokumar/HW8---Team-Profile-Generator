@@ -131,15 +131,9 @@ function createPageHTML(cardsHTML) {
 `;
 }
 
-// Stitching the string of card templates into the HTML skeleton and finally creating the entire HTML page.
+// Stitching the string of card templates into the HTML skeleton.
 
 //This function takes in an array (of employee data), makes cards for them, and then stitches the cards into the HTML skeleton to create the index.html contents.
-// function entirePage(array) {
-//   console.log("This is what I'm putting into entirePage" + array);
-//   const cardsHTML = createHTMLCards(array);
-//   const entirePage = createPageHTML(cardsHTML);
-//   return entirePage;
-// }
 
 //Export to index
 module.exports = {
