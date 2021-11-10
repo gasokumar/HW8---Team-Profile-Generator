@@ -21,6 +21,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const { data } = require("browserslist");
 const { add } = require("lodash");
+const HTMLtemplates = require("./src (Template helper code)");
 
 //Store data in an array and use functions that take in that data to create objects whose properties will be inserted into the cards
 
@@ -133,6 +134,6 @@ const createFile = fs.writeFile("./dist/index.html", data, (err) =>
 );
 
 //Create the manager, then create the employees. After you create the employees, generate an html card for each employee. Afer this, append these cards to the pre-written html skeleton.
-addManager().then(addEmployee).then(generateHTMLCards);
+addManager().then(addEmployee).then(HTMLtemplates);
 
 //The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton.
