@@ -32,17 +32,57 @@ function managerCard(manager) {
 
 //Engineer
 //Will intake engineer properties and input them into an html template
+function engineerCard(engineer) {
+  return `<div class="container">
+  <div class="card">
+    <div class="box">
+      <div class="content">
+        <h2>E</h2>
+        <h3>${engineer.name}</h3>
+        <p>Role: Engineer</p>
+        <p>ID: ${engineer.id}</p>
+        <p>
+          Email:
+          <a href="mailto:${engineer.email}">${engineer.email}</a>
+        </p>
+        <p>Github: <a href="github.com/${engineer.github}">${engineer.github}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
 
 //Intern
 //Will intake intern properties and input them into an html template
+function internCard(intern) {
+  return `<div class="container">
+  <div class="card">
+    <div class="box">
+      <div class="content">
+        <h2>E</h2>
+        <h3>${intern.name}</h3>
+        <p>Role: Engineer</p>
+        <p>ID: ${intern.id}</p>
+        <p>
+          Email:
+          <a href="mailto:${intern.email}">${intern.email}</a>
+        </p>
+        <p>School: ${intern.school}</p>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
 
 //Create a function that makes an array that will actually use the above functions. This function will be responsible for creating the actual cards and joining the HTML pieces into a string.
 
 //Returns an HTML string of card templates
 function createHTMLCards(employees) {
+  console.log("This is the console log for employees" + employees);
   arrayCards = [];
   // For loop that iterates through the employees inputted, gets their role, and generates their card accordingly.
-  for (employee of employees) {
+  for (const employee of employees) {
     const role = employee.getRole();
     if (role == "Manager") {
       const card = managerCard(employee);
@@ -50,13 +90,11 @@ function createHTMLCards(employees) {
     }
 
     if (role == "Engineer") {
-      break;
       const card = engineerCard(employee);
       arrayCards.push(card);
     }
 
     if (role == "Intern") {
-      break;
       const card = internCard(employee);
       arrayCards.push(card);
     }
@@ -94,19 +132,23 @@ function createPageHTML(cardsHTML) {
 `;
 }
 
-//Stitching the string of card templates into the HTML skeleton and finally creating the entire HTML page.
-// function entirePage() {
-//   const entirePage = createPageHTML(cardsHTML);
-//   return entirePage;
-// }
+// Stitching the string of card templates into the HTML skeleton and finally creating the entire HTML page.
+
+//This function takes in an array (of employee data), makes cards for them, and then stitches the cards into the HTML skeleton to create the index.html contents.
+function entirePage(array) {
+  console.log("This is what I'm putting into entirePage" + array);
+  const cardsHTML = createHTMLCards(array);
+  const entirePage = createPageHTML(cardsHTML);
+  return entirePage;
+}
 
 //Export to index
 module.exports = {
   managerCard,
-  // engineerCard,
-  // internCard,
+  engineerCard,
+  internCard,
   createHTMLCards,
   createPageHTML,
   //Do i just need entirePage?
-  // entirePage,
+  entirePage,
 };

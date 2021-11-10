@@ -11,7 +11,11 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const { createHTMLCards, createPageHTML } = require("./src/templateHTML");
+const {
+  createHTMLCards,
+  createPageHTML,
+  entirePage,
+} = require("./src/templateHTML");
 
 //Store data in an array and use functions that take in that data to create objects whose properties will be inserted into the cards
 
@@ -24,7 +28,7 @@ const teamArray = [];
 
 //addManager creates a manager and pushes it to the team array.
 const addManager = () => {
-  return inquirer
+  return inquirer //If return isn't here, when prompted it immediately breaks out of the script and doesn't let you input responses
     .prompt([
       {
         type: "input",
@@ -107,12 +111,13 @@ const addEmployee = () => {
         teamArray.push(owenWilson);
         console.log(teamArray);
       }
-      if (confirmNewEmployee == false) {
-        //If the user answers no to whether they want to add a team member, return the array of team members
-        return teamArray;
-      } else {
+      if (confirmNewEmployee == true) {
         //If the user answers that they do want to add a team member, bring the user back to the beginning
         addEmployee();
+      } else {
+        //If the user answers no to whether they want to add a team member, return the array of team members
+        console.log("This is where the return teamArray is");
+        return teamArray;
       }
     });
 };
@@ -140,20 +145,31 @@ function createFile(data) {
 //Create the manager, then create the employees. After you create the employees, generate an html card for each employee. Afer this, append these cards to the pre-written html skeleton.
 
 addManager() // Returns the inquirer answers for manager
-  .then(addEmployee) //Returns teamArray, the array of objects that store the employee data.
+  .then(addEmployee) //Returns teamArray, the array of employee objects that store the employee data.
   .then((teamArray) => {
-    return createHTMLCards(teamArray);
-    // returns a string of HTML card templates created from the array of employees
-  })
-  .then((cardsHTML) => {
-    console.log(typeof createPageHTML(cardsHTML));
-    return createPageHTML(cardsHTML);
-    // returns a string of the full html page
-  })
-  .then((pageHTML) => {
-    createFile(pageHTML);
-  })
-  .catch((err) => {
-    console.error(err);
+    console.log(
+      "this is immediately after the first addEmployee call" + teamArray
+    );
   });
+// .then((pageHTML) => {
+//   return createFile(pageHTML);
+// });
+// .then(entirePage)
+// .then((pageHTML) => {
+//   createFile(pageHTML);
+// })
+// .catch((err) => {
+//   console.error(err);
+// });
 //The inquirer inquirer.prompt method returns a promise, which we then use to create objects with our pre-defined constructor functions.  Once these objects are created and stored in an array, we use this data to create cards with our template helper code module and then insert these cards into our html page skeleton.
+
+// .then((teamArray) => {
+//   console.log("This is the result of teamArrayteamArray", teamArray);
+//   return createHTMLCards(teamArray);
+//   // returns a string of HTML card templates created from the array of employees
+// })
+// .then((cardsHTML) => {
+//   console.log(typeof createPageHTML(cardsHTML));
+//   return createPageHTML(cardsHTML);
+//   // returns a string of the full html page
+// })
