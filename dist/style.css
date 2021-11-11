@@ -7,6 +7,15 @@
   font-family: "Poppins", sans-serif;
 }
 
+header {
+  width: 100%;
+  padding: 60px 0;
+  text-align: center;
+  background: #33cccc;
+  color: white;
+  font-size: 60px;
+}
+
 body {
   display: flex;
   justify-content: center;

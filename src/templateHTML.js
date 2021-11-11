@@ -123,6 +123,7 @@ function createPageHTML(cardsHTML) {
   </head>
 
   <body>
+  <header>Our Team</header>
     <!-- Cards will go here -->
     ${cardsHTML}
     <!-- End of cards -->
