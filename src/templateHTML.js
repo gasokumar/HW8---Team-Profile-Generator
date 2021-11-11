@@ -45,7 +45,7 @@ function engineerCard(engineer) {
           Email:
           <a href="mailto:${engineer.email}">${engineer.email}</a>
         </p>
-        <p>Github: <a href="github.com/${engineer.github}">github.com/${engineer.github}</a>
+        <p>Github: <a href="github.com/${engineer.github}" target="_blank">github.com/${engineer.github}</a>
         </p>
       </div>
     </div>
