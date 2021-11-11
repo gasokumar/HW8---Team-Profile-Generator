@@ -1,6 +1,6 @@
 # Team Profile Generator
 
-This web app was created using test-driven development to create employee profiles and generate an HTML page that will showcase these profiles based on user input.
+This app was created using test-driven development to create employee profiles and generate an HTML page that will showcase these profiles based on user input.
 
 ## Installation
 
@@ -19,6 +19,8 @@ npm index.js
 ```
 
 ## Walkthrough video
+
+https://watch.screencastify.com/v/ayrpdrs5HqtGpBy6S3fp
 
 ## Contributing
 

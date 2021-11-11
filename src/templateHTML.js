@@ -62,7 +62,7 @@ function internCard(intern) {
       <div class="content">
         <h2>I</h2>
         <h3>${intern.name}</h3>
-        <p>Role: Engineer</p>
+        <p>Role: Intern</p>
         <p>ID: ${intern.id}</p>
         <p>
           Email:
